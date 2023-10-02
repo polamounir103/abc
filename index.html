@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/all.css">
+    <link rel="stylesheet" href="style/all.min.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <title>JS Project</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg border-bottom">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">DooN_Store</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end w-50" id="navbarNavDropdown">
+                <ul class="navbar-nav d-flex flex-shrink-1">
+                  <li class="nav-item fw-bold">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item fw-bold">
+                      <a class="nav-link" href="#">Favorite</a>
+                    </li>
+                    <li class="nav-item cartNavItem">
+                      <a class="nav-link cartNavIcon d-flex" >
+                        <div class="cartIconBox">
+                            <i class="fa-solid fa-cart-shopping fs-3 me-1"></i>  
+                            <span class="cartBadge"></span>
+                        </div>
+                        <span class="fw-bold">Cart</span>
+                    </a>
+                      <div class="cartMenu">
+                        <div class="cartProductsContainer" id="cartProductsContainer">
+                            
+                        </div> <!-- cartProductsContainer -->
+
+                        <!-- ********************************* -->
+                        <div class="cartBtn">
+                            <a class="btn btn-primary" href="cart.html"> View All Product</a>
+                            <button class="btn btn-danger" id="deleteAllCart"> Delete All</button>
+                        </div>
+                      </div>
+                  </li>
+                  <li class="nav-item ">
+                </ul>
+                <!-- ********** User Actions  *********** -->
+                <div class="d-flex justify-content-start  ms-lg-3 mt-lg-0 mt-2 ms-0 profileBox">
+                    <a class="me-2" href="signin.html" id="signInBtn"><button class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i>  SignIn</button></a>
+                    <a class="me-2" href="signup.html" id="signupBtn"><button class="btn btn-light"><i class="fa-solid fa-user-plus"></i>  SignUp</button></a>
+                    <a class="me-2"  id="profileNameBox">
+                    <img src="images/userPhoto.png" alt="" id="userImg"> 
+                      <div class="profileNameMenu">
+                        <button class="w-100 profileName profileMenuItem"> <i class="fa-solid fa-user"></i> &nbsp; Hi, </button>
+                        <button class="w-100 profileMenuItem"><i class="fa-solid fa-gear"></i>&nbsp; Edit Profile</button>
+                        <button class="btn btn-danger" id="logoutBtn">Logout  <i class="fa-solid fa-right-from-bracket"></i></button>
+                    </div>
+                    </a>
+                </div> <!-- Profile Box -->
+            </li>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <!-- ********************************************* -->
+    <main class="mb-5">
+        <div class="searchContainer container mt-3">
+            <form class="d-flex flex-column flex-md-row searchForm">
+                <div class="searchTypeBox mb-2">
+                    <select name="searchType" id="searchType">
+                        <option value="name">Search By Name</option>
+                        <option value="category">Search By Category</option>
+                        <option value="price">Search By Price</option>
+                    </select>
+                </div>
+                <div class="searchValueBox mb-2">
+                    <input type="text" id="productNameInput" placeholder="Enter Name Of The Product">
+                    <select name="searchValue" id="productCategoryInput">
+                        <option value="fashion">Fashion</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="bodyCare">Body Care</option>
+                        <option value="grocery">Grocery</option>
+                    </select>
+                    
+                    <div class="productPriceInput" id="productPriceInput">
+                        <input type="number" name="minPrice" id="searchMinPrice" min="0">
+                        <input type="number" name="maxPrice" id="searchMaxPrice" min="0">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="mainPageContainer">
+
+
+
+            <!-- ***************************** -->
+            <!-- <div class="productCard "> -->
+                <!-- <div class="productCardHeader"> -->
+                    <!-- <img src="images/glasses.png" alt="" class="productImg"> -->
+                <!-- </div> productCardHeader -->
+                <!-- <div class="productCardFooter d-flex flex-column"> -->
+                    <!-- <h2>Product Name</h2> -->
+                    <!-- <p class="productDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!</p> -->
+                    <!-- <div class="productPriceInfo"> -->
+                        <!-- <div class="d-flex"> -->
+                            <!-- <div class="productPriceBox ">  productOriginalPriceBox  -->
+                                <!-- <span class="productPrice productOriginalPrice">150</span> -->
+                                <!-- <sub> EGP</sub> -->
+                            <!-- </div> -->
+                            <!-- <div class="productNewPriceBox notActive"> -->
+                                <!-- <span class="productNewPrice">150</span> -->
+                                <!-- <sub> EGP</sub> -->
+                            <!-- </div> -->
+                        <!-- </div> -->
+                        <!-- <span class="favoriteBtn"><i class="far fa-heart"></i></span> -->
+                    <!-- </div> -->
+                    <!-- <button class=" btn btn-primary mt-2 addToCartBtn">Add Cart</button> -->
+                    <!-- <div class="cardProductQuantity">
+                        <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+                        <span id="cartProductQuantity">1</span>
+                        <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+                    </div> -->
+
+                <!-- </div> productCardFooter -->
+            <!-- </div> productCard -->
+            <!-- ***************************** -->
+
+
+
+        </div>
+    </main>
+
+    <!-- **************** Error Container  ************* -->
+    <div class="errorMessageContainer ">
+        <div class="errorMessage">
+          <button class="closeErrorBtn btn btn-danger"><i class="fa-solid fa-xmark"></i></button>
+          <h2>Alert !!</h2>
+          <ul class="errorMessageList container">
+            
+          </ul>
+        </div>
+      </div>
+  
+    <!-- ********************************************* -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/all.min.js"></script>
+    <script src="js/script.js"></script>
+    
+</body>
+</html>

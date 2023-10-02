@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/all.css">
+    <link rel="stylesheet" href="style/all.min.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/signin.css">
+    <title>JS Project</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg border-bottom">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">DooN_Store</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end w-50" id="navbarNavDropdown">
+                <ul class="navbar-nav d-flex flex-shrink-1">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                  </li>
+
+                  <li class="nav-item ">
+                </ul>
+                <div class="d-flex justify-content-start  ms-lg-5 ms-0 profileBox">
+                    <a class="me-2" href="signup.html"><button class="btn btn-light"><i class="fa-solid fa-user-plus"></i>  SignUp</button></a>
+                </div> <!-- Profile Box -->
+            </li>
+              </div>
+            </div>
+          </nav>
+          <!-- ********************** -->
+          
+    </header>
+    <!-- ********************************************* -->
+    <main>
+        <div class="formContainer container">
+            <form>
+                <h2>Sign In</h2>
+                <div class="inputContainer">
+                  <span class="inputName ">Username or Email</span>
+                  <input type="text" placeholder="Enter Username Or Email" id="username" autocomplete="off">
+                </div>
+                <div class="inputContainer">
+                  <span class="inputName">Password</span>
+                  <input type="password" placeholder="Enter Password" id="password">
+                  <span class="passwordEye"><i class="fa-solid fa-eye"></i></span>
+                  <!-- <i class="fa-solid fa-eye-slash"></i> -->
+                </div>
+                <div class="submitContainer">
+                  <button class="btn" id="submitBtn">SignIn <i class="fa-solid fa-right-to-bracket"></i></button>
+                  <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+    <div class="errorMessageContainer">
+      <div class="errorMessage">
+        <button class="closeErrorBtn btn btn-danger"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Error</h2>
+        <ul class="errorMessageList container">
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- ********************************************* -->
+    <footer>
+      <div>
+        <ul>
+          <li>faceBook</li>
+          <li>Instagram</li>
+          <li>Whatsapp</li>
+          <li>Linkedin</li>
+        </ul>
+      </div>
+    </footer>
+    <!-- ********************************************* -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/all.min.js"></script>
+    <script src="js/signin.js"></script>
+    
+</body>
+</html>

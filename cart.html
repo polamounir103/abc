@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/all.css">
+    <link rel="stylesheet" href="style/all.min.css">
+    <link rel="stylesheet" href="style/bootstrap.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/cart.css">
+    <title>JS Project</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg border-bottom">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">DooN_Store</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-end w-50" id="navbarNavDropdown">
+                <ul class="navbar-nav d-flex flex-shrink-1">
+                  <li class="nav-item fw-bold">
+                    <a class="nav-link " aria-current="page" href="index.html">Home</a>
+                  </li>
+                  <li class="nav-item fw-bold">
+                      <a class="nav-link" href="#">Favorite</a>
+                    </li>
+                    <li class="nav-item cartNavItem">
+                      <a class="nav-link active cartNavIcon d-flex" >
+                        <div class="cartIconBox">
+                            <i class="fa-solid fa-cart-shopping fs-3 me-1"></i>  
+                            <span class="cartBadge"></span>
+                        </div>
+                        <span class="fw-bold">Cart</span>
+                    </a>
+                      <div class="cartMenu">
+                        <div class="cartProductsContainer" id="cartProductsContainer">
+                            
+                        </div> <!-- cartProductsContainer -->
+
+                        <!-- ********************************* -->
+                        <div class="cartBtn">
+                            <button class="btn btn-primary"> View All Product</button>
+                            <button class="btn btn-danger" id="deleteAllCart"> Delete All</button>
+                        </div>
+                      </div>
+                  </li>
+                  <li class="nav-item ">
+                </ul>
+                <!-- ********** User Actions  *********** -->
+                <div class="d-flex justify-content-start  ms-lg-3 mt-lg-0 mt-2 ms-0 profileBox">
+                    <a class="me-2" href="signin.html" id="signInBtn"><button class="btn btn-primary"><i class="fa-solid fa-right-to-bracket"></i>  SignIn</button></a>
+                    <a class="me-2" href="signup.html" id="signupBtn"><button class="btn btn-light"><i class="fa-solid fa-user-plus"></i>  SignUp</button></a>
+                    <a class="me-2"  id="profileNameBox">
+                    <img src="images/userPhoto.png" alt="" id="userImg"> 
+                      <div class="profileNameMenu">
+                        <button class="w-100 profileName profileMenuItem"> <i class="fa-solid fa-user"></i> &nbsp; Hi, </button>
+                        <button class="w-100 profileMenuItem"><i class="fa-solid fa-gear"></i>&nbsp; Edit Profile</button>
+                        <button class="btn btn-danger" id="logoutBtn">Logout  <i class="fa-solid fa-right-from-bracket"></i></button>
+                    </div>
+                    </a>
+                </div> <!-- Profile Box -->
+            </li>
+              </div>
+            </div>
+          </nav>
+    </header>
+    <!-- ********************************************* -->
+    <main class="my-5 py-5 d-flex flex-column container">
+        <h2 class=" mb-4 sectionTitle">Your Cart </h2>
+        <div class="cartContainer container d-flex flex-column flex-lg-row p-5 mb-5 ">
+          `<h2 class="emptyContainer">Cart Is Empty</h2>
+           <a class="btn" href="index.html">Go Shopping</a>`
+
+        </div> <!-- cartContainer -->
+
+        <hr>
+        <div class="mt-5">
+          <h2 class="mb-4 sectionTitle">Favorite</h2>
+          <div class="Favorite">
+            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example  favoriteContainer" tabindex="0">
+              
+              <!-- <div id="list-item-1"  class="scrollCard bg-light favoriteCard">
+                <div class="favoriteImgBox ">
+                  <img src="images/airbuds.png" alt="" class="favoriteImg" draggable="false">
+                </div>
+                <div class="favoriteCardText">
+                  <h2 class="favoriteName">Product Name</h2>
+                  <button class=" favoriteIcon"><i class="fas fa-heart"></i></button>
+                </div>
+              </div> -->
+              
+
+              <div id="list-item-2"  class="scrollCard bg-light favoriteCard"></div>
+              <div id="list-item-2"  class="scrollCard bg-light favoriteCard"></div>
+              <div id="list-item-2"  class="scrollCard bg-light favoriteCard"></div>
+            </div>
+            
+            <div id="list-example" class="list-group circlesBox d-none d-lg-flex">
+              <!-- <a class="list-group-item list-group-item-action" href="#list-item-1"></a> -->
+              <!-- <a class="list-group-item list-group-item-action" href="#list-item-2"></a> -->
+              <!-- <a class="list-group-item list-group-item-action" href="#list-item-3"></a> -->
+            </div>
+          </div> <!-- Favorite -->
+        </div>
+      </main>
+
+
+ 
+    <!-- ********************************************* -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/all.min.js"></script>
+    <script src="js/cart.js"></script>
+    
+</body>
+</html>
