@@ -63,7 +63,7 @@ let searchCategoryInput = document.getElementById('productCategoryInput');
 let productPriceInputBox = document.getElementById('productPriceInput');
 let searchMinPrice = document.getElementById('productMinPrice');
 let searchMaxPrice = document.getElementById('productMaxPrice');
-// console.log(searchType.value)
+console.log(searchMinPrice.value)
 searchType.addEventListener('change', () => {
     if (searchType.value === "name" ){
         searchNameInput.style.display = "block";   
@@ -110,8 +110,8 @@ if (allMainProducts){
             cartPrice : 0,
             favorite : false,
             bestSales : false,
-            discount : false,
-            discountAmount : 0,
+            discount : true,
+            discountAmount : 20,
             cartQuantity : 0 ,
         },
         {
@@ -138,8 +138,8 @@ if (allMainProducts){
             cartPrice : 0,
             favorite : false,
             bestSales : false,
-            discount : false,
-            discountAmount : 0,
+            discount : true,
+            discountAmount : 5,
             cartQuantity : 0 ,
         },
         {
@@ -515,14 +515,21 @@ function favoriteProduct (id) {
 // *******************  Search  *****************
 
 
+// const allSearchProductsCards = [];
+
+
 // searchNameInput.addEventListener("input", function() {
-//     const allSearchProductsCards= allMainProducts.map((product) => {
-//         let productName = product.name
-//         let name = productName.toLowerCase()
-//         let nameInput = searchNameInput.value
-//         let key = nameInput.toLowerCase()
-//         if(name.indexOf(key) !== -1) {
-//             // console.log(key + product.name)
+
+//     allSearchProductsCards.length = 0;
+
+//     allMainProducts.forEach((product) => {
+//         let productName = product.name;
+//         let name = productName.toLowerCase();
+//         let nameInput = searchNameInput.value;
+//         let key = nameInput.toLowerCase();
+
+//         if (name.indexOf(key) !== -1) {
+
 //             let productPriceBoxClass = "productPriceBox";
 //             let productNewPriceBox = "productNewPriceBox notActive";
 //             let productFavoriteClass = "far fa-heart"
@@ -538,108 +545,376 @@ function favoriteProduct (id) {
 //             if (product.bestSales === true) {
 //                 bestSaleClass += " bestSale"
 //             }
-//             return `<div class="${bestSaleClass}">
-//             <div class="productCardHeader">
-//                 <img src="${product.imgPath}" alt="" class="productImg">
-//             </div> <!-- productCardHeader -->
-//             <div class="productCardFooter d-flex flex-column">
-//                 <h2>${product.name}</h2>
-//                 <p class="productDescription">${product.description}</p>
-//                 <div class="productPriceInfo">
-//                             <div class="d-flex">
-//                                 <div class="${productPriceBoxClass}">
-//                                     <span class="productOriginalPrice">${product.price}</span>
-//                                     <sub> EGP</sub>
-//                                 </div>
-//                                 <div class="${productNewPriceBox}">
-//                                     <span class="productNewPrice">${product.price-product.discountAmount}</span>
-//                                     <sub> EGP</sub>
-//                                 </div>
-//                             </div>
-//                             <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
-//                         </div>
-//                         <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>
-    
-//                         <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
-//                             <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
-//                             <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
-//                             <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
-//                         </div>
-//                         </div> <!-- productCardFooter -->
-//                 </div> <!-- productCard -->`
+
+//             allSearchProductsCards.push(`<div class="${bestSaleClass}">
+//              <div class="productCardHeader">
+//                  <img src="${product.imgPath}" alt="" class="productImg">
+//              </div> <!-- productCardHeader -->
+//              <div class="productCardFooter d-flex flex-column">
+//                  <h2>${product.name}</h2>
+//                  <p class="productDescription">${product.description}</p>
+//                  <div class="productPriceInfo">
+//                              <div class="d-flex">
+//                                  <div class="${productPriceBoxClass}">
+//                                      <span class="productOriginalPrice">${product.price}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                                  <div class="${productNewPriceBox}">
+//                                      <span class="productNewPrice">${product.price-product.discountAmount}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                              </div>
+//                              <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
+//                          </div>
+//                          <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>  
+//                          <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+//                              <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+//                              <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+//                              <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+//                          </div>
+//                          </div> <!-- productCardFooter -->
+//                  </div> <!-- productCard -->`)
 //         }
+//     });
     
-//         mainPageContainer.innerHTML = allSearchProductsCards.join('')
+//     mainPageContainer.innerHTML = allSearchProductsCards.join('');
+// });
+
+
+
+
+
+
+// searchCategoryInput.addEventListener("change", function() {
+
+//     allSearchProductsCards.length = 0;
+
+//     allMainProducts.forEach((product) => {
+//         let productName = product.category;
+//         let name = productName.toLowerCase();
+//         let nameInput = searchCategoryInput.value;
+//         let key = nameInput.toLowerCase();
+
+//         if (name.indexOf(key) !== -1) {
+
+//             let productPriceBoxClass = "productPriceBox";
+//             let productNewPriceBox = "productNewPriceBox notActive";
+//             let productFavoriteClass = "far fa-heart"
+//             let bestSaleClass = "productCard"
+    
+//             if (product.discount === true) {
+//                 productPriceBoxClass += " productOriginalPriceBox";
+//                 productNewPriceBox -= "notActive"
+//             }
+//             if (product.favorite === true) {
+//                 productFavoriteClass = "fas fa-heart active";
+//             }
+//             if (product.bestSales === true) {
+//                 bestSaleClass += " bestSale"
+//             }
+//             // Push the generated product card HTML to the array
+//             allSearchProductsCards.push(`<div class="${bestSaleClass}">
+//              <div class="productCardHeader">
+//                  <img src="${product.imgPath}" alt="" class="productImg">
+//              </div> <!-- productCardHeader -->
+//              <div class="productCardFooter d-flex flex-column">
+//                  <h2>${product.name}</h2>
+//                  <p class="productDescription">${product.description}</p>
+//                  <div class="productPriceInfo">
+//                              <div class="d-flex">
+//                                  <div class="${productPriceBoxClass}">
+//                                      <span class="productOriginalPrice">${product.price}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                                  <div class="${productNewPriceBox}">
+//                                      <span class="productNewPrice">${product.price-product.discountAmount}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                              </div>
+//                              <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
+//                          </div>
+//                          <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>  
+//                          <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+//                              <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+//                              <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+//                              <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+//                          </div>
+//                          </div> <!-- productCardFooter -->
+//                  </div> <!-- productCard -->`)
 //         }
-//     )
-// })
+//     });
+    
+//     mainPageContainer.innerHTML = allSearchProductsCards.join('');
+// });
+
+
+// // searchMinPrice.addEventListener('change', () => {
+// //     let minValue = searchMinPrice.value
+// //     if (minValue >= productMaxPrice.value) {
+// //         searchMaxPrice.value = parseInt(minValue) +1
+// //         console.log(searchMaxPrice.value)
+// //         console.log(searchMinPrice.value)
+// //     }
+
+// // })
+
+
+// searchMinPrice.addEventListener('input', updateMinPrice)
+// searchMaxPrice.addEventListener('input', updateMaxPrice);
+// searchMinPrice.addEventListener('change', updateMinPrice);
+// searchMaxPrice.addEventListener('change', updateMaxPrice);
+
+// function updateMinPrice () {
+//     let minValue = parseFloat(searchMinPrice.value);
+//     let maxValue = parseFloat(productMaxPrice.value); 
+
+//     if (minValue >= maxValue) {
+//         searchMaxPrice.value = (minValue + 1).toString();
+//     }
+    
+
+//     allSearchProductsCards.length = 0;
+
+//     allMainProducts.forEach((product) => {
+//         let productPrice = product.price;
+//         if (productPrice <= searchMaxPrice.value && productPrice >= searchMinPrice.value) {
+//             let productPriceBoxClass = "productPriceBox";
+//             let productNewPriceBox = "productNewPriceBox notActive";
+//             let productFavoriteClass = "far fa-heart"
+//             let bestSaleClass = "productCard"
+    
+//             if (product.discount === true) {
+//                 productPriceBoxClass += " productOriginalPriceBox";
+//                 productNewPriceBox -= "notActive"
+//             }
+//             if (product.favorite === true) {
+//                 productFavoriteClass = "fas fa-heart active";
+//             }
+//             if (product.bestSales === true) {
+//                 bestSaleClass += " bestSale"
+//             }
+
+//             allSearchProductsCards.push(`<div class="${bestSaleClass}">
+//              <div class="productCardHeader">
+//                  <img src="${product.imgPath}" alt="" class="productImg">
+//              </div> <!-- productCardHeader -->
+//              <div class="productCardFooter d-flex flex-column">
+//                  <h2>${product.name}</h2>
+//                  <p class="productDescription">${product.description}</p>
+//                  <div class="productPriceInfo">
+//                              <div class="d-flex">
+//                                  <div class="${productPriceBoxClass}">
+//                                      <span class="productOriginalPrice">${product.price}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                                  <div class="${productNewPriceBox}">
+//                                      <span class="productNewPrice">${product.price-product.discountAmount}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                              </div>
+//                              <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
+//                          </div>
+//                          <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>  
+//                          <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+//                              <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+//                              <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+//                              <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+//                          </div>
+//                          </div> <!-- productCardFooter -->
+//                  </div> <!-- productCard -->`)
+//         }
+//     });
+    
+//     mainPageContainer.innerHTML = allSearchProductsCards.join('');
+
+// }
+
+// function updateMaxPrice() {
+//     // let minValue = parseFloat(searchMinPrice.value);
+//     // let maxValue = parseFloat(searchMaxPrice.value);
+
+//     allSearchProductsCards.length = 0;
+//     allMainProducts.forEach((product) => {
+//         let productPrice = product.price;
+//         if (productPrice <= searchMaxPrice.value && productPrice >= searchMinPrice.value) {
+
+//             let productPriceBoxClass = "productPriceBox";
+//             let productNewPriceBox = "productNewPriceBox notActive";
+//             let productFavoriteClass = "far fa-heart"
+//             let bestSaleClass = "productCard"
+    
+//             if (product.discount === true) {
+//                 productPriceBoxClass += " productOriginalPriceBox";
+//                 productNewPriceBox -= "notActive"
+//             }
+//             if (product.favorite === true) {
+//                 productFavoriteClass = "fas fa-heart active";
+//             }
+//             if (product.bestSales === true) {
+//                 bestSaleClass += " bestSale"
+//             }
+
+//             allSearchProductsCards.push(`<div class="${bestSaleClass}">
+//              <div class="productCardHeader">
+//                  <img src="${product.imgPath}" alt="" class="productImg">
+//              </div> <!-- productCardHeader -->
+//              <div class="productCardFooter d-flex flex-column">
+//                  <h2>${product.name}</h2>
+//                  <p class="productDescription">${product.description}</p>
+//                  <div class="productPriceInfo">
+//                              <div class="d-flex">
+//                                  <div class="${productPriceBoxClass}">
+//                                      <span class="productOriginalPrice">${product.price}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                                  <div class="${productNewPriceBox}">
+//                                      <span class="productNewPrice">${product.price-product.discountAmount}</span>
+//                                      <sub> EGP</sub>
+//                                  </div>
+//                              </div>
+//                              <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
+//                          </div>
+//                          <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>  
+//                          <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+//                              <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+//                              <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+//                              <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+//                          </div>
+//                          </div> <!-- productCardFooter -->
+//                  </div> <!-- productCard -->`)
+//         }
+//     });
+    
+//     mainPageContainer.innerHTML = allSearchProductsCards.join('');
+// }
 
 
 
 
-// Declare allSearchProductsCards variable outside the event listener function
+
 const allSearchProductsCards = [];
 
-searchNameInput.addEventListener("input", function() {
-    // Clear the array before adding new products
+function generateProductCard(product) {
+    let productPriceBoxClass = "productPriceBox";
+    let productNewPriceBox = "productNewPriceBox notActive";
+    let productFavoriteClass = "far fa-heart";
+    let bestSaleClass = "productCard";
+
+    if (product.discount === true) {
+        productPriceBoxClass += " productOriginalPriceBox";
+        productNewPriceBox -= "notActive";
+    }
+    if (product.favorite === true) {
+        productFavoriteClass = "fas fa-heart active";
+    }
+    if (product.bestSales === true) {
+        bestSaleClass += " bestSale";
+    }
+
+    return `<div class="${bestSaleClass}">
+        <div class="productCardHeader">
+            <img src="${product.imgPath}" alt="" class="productImg">
+        </div>
+        <div class="productCardFooter d-flex flex-column">
+            <h2>${product.name}</h2>
+            <p class="productDescription">${product.description}</p>
+            <div class="productPriceInfo">
+                <div class="d-flex">
+                    <div class="${productPriceBoxClass}">
+                        <span class="productOriginalPrice">${product.price}</span>
+                        <sub> EGP</sub>
+                    </div>
+                    <div class="${productNewPriceBox}">
+                        <span class="productNewPrice">${product.price - product.discountAmount}</span>
+                        <sub> EGP</sub>
+                    </div>
+                </div>
+                <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct(${product.id})"></i></span>
+            </div>
+            <button class="btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick="addToCart(${product.id})">Add Cart</button>
+            <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+                <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement(${product.id})">+</span>
+                <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+                <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+            </div>
+        </div>
+    </div>`;
+}
+
+function updateSearchResults() {
     allSearchProductsCards.length = 0;
+    const searchNameValue = searchNameInput.value.toLowerCase();
+    const searchCategoryValue = searchCategoryInput.value;
+    const minPrice = parseFloat(searchMinPrice.value);
+    const maxPrice = parseFloat(searchMaxPrice.value);
 
     allMainProducts.forEach((product) => {
-        let productName = product.name;
-        let name = productName.toLowerCase();
-        let nameInput = searchNameInput.value;
-        let key = nameInput.toLowerCase();
+        const productName = product.name.toLowerCase();
+        const productCategory = product.category.toLowerCase();
+        const productPrice = parseFloat(product.price);
 
-        if (name.indexOf(key) !== -1) {
-            // Rest of your code to generate product cards
-            let productPriceBoxClass = "productPriceBox";
-            let productNewPriceBox = "productNewPriceBox notActive";
-            let productFavoriteClass = "far fa-heart"
-            let bestSaleClass = "productCard"
-    
-            if (product.discount === true) {
-                productPriceBoxClass += " productOriginalPriceBox";
-                productNewPriceBox -= "notActive"
-            }
-            if (product.favorite === true) {
-                productFavoriteClass = "fas fa-heart active";
-            }
-            if (product.bestSales === true) {
-                bestSaleClass += " bestSale"
-            }
-            // Push the generated product card HTML to the array
-            allSearchProductsCards.push(`<div class="${bestSaleClass}">
-             <div class="productCardHeader">
-                 <img src="${product.imgPath}" alt="" class="productImg">
-             </div> <!-- productCardHeader -->
-             <div class="productCardFooter d-flex flex-column">
-                 <h2>${product.name}</h2>
-                 <p class="productDescription">${product.description}</p>
-                 <div class="productPriceInfo">
-                             <div class="d-flex">
-                                 <div class="${productPriceBoxClass}">
-                                     <span class="productOriginalPrice">${product.price}</span>
-                                     <sub> EGP</sub>
-                                 </div>
-                                 <div class="${productNewPriceBox}">
-                                     <span class="productNewPrice">${product.price-product.discountAmount}</span>
-                                     <sub> EGP</sub>
-                                 </div>
-                             </div>
-                             <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
-                         </div>
-                         <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>  
-                         <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
-                             <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
-                             <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
-                             <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
-                         </div>
-                         </div> <!-- productCardFooter -->
-                 </div> <!-- productCard -->`)
+        if (
+            (searchType.value === "name" && productName.includes(searchNameValue)) ||
+            (searchType.value === "category" && productCategory == searchCategoryValue) ||
+            (searchType.value === "price" && productPrice >= minPrice && productPrice <= maxPrice)
+        ) {
+            allSearchProductsCards.push(generateProductCard(product));
         }
     });
-    
+
     mainPageContainer.innerHTML = allSearchProductsCards.join('');
+}
+
+searchType.addEventListener('change', () => {
+
+    updateSearchResults();
 });
 
+searchNameInput.addEventListener("input", updateSearchResults);
+searchMinPrice.addEventListener("input", updateSearchResults);
+searchMaxPrice.addEventListener("input", updateSearchResults);
 
+
+
+
+// ************************************
+
+// Assuming you have these variables defined already
+// const searchType = document.getElementById('searchType');
+// const searchCategoryInput = document.getElementById('productCategoryInput');
+// const allSearchProductsCards = [];
+
+// // ...
+
+// function updateSearchResults() {
+//     allSearchProductsCards.length = 0;
+//     const searchNameValue = searchNameInput.value.toLowerCase();
+//     const searchCategoryValue = searchCategoryInput.value.toLowerCase();
+//     const minPrice = parseFloat(searchMinPrice.value);
+//     const maxPrice = parseFloat(searchMaxPrice.value);
+
+//     allMainProducts.forEach((product) => {
+//         const productName = product.name.toLowerCase();
+//         const productCategory = product.category.toLowerCase();
+//         const productPrice = parseFloat(product.price);
+
+//         if (
+//             (searchType.value === "name" && productName.includes(searchNameValue)) ||
+//             (searchType.value === "category" && productCategory.includes(searchCategoryValue)) ||
+//             (searchType.value === "price" && productPrice >= minPrice && productPrice <= maxPrice)
+//         ) {
+//             allSearchProductsCards.push(generateProductCard(product));
+//         }
+//     });
+
+//     mainPageContainer.innerHTML = allSearchProductsCards.join('');
+// }
+
+// searchType.addEventListener('change', () => {
+//     updateSearchResults();
+// });
+
+// searchNameInput.addEventListener("input", updateSearchResults);
+// searchCategoryInput.addEventListener("change", updateSearchResults); // Listen for change event here
+// searchMinPrice.addEventListener("input", updateSearchResults);
+// searchMaxPrice.addEventListener("input", updateSearchResults);

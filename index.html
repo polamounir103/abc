@@ -78,8 +78,9 @@
                     </select>
                 </div>
                 <div class="searchValueBox mb-2">
-                    <input type="text" id="productNameInput" placeholder="Enter Name Of The Product">
-                    <select name="searchValue" id="productCategoryInput">
+                    <input class="searchValueInput" name="name" type="text" id="productNameInput" placeholder="Enter Name Of The Product">
+                    <select class="searchValueInput" name="category" id="productCategoryInput">
+                        <option value="" >-- Choose Category -- </option>
                         <option value="fashion">Fashion</option>
                         <option value="electronics">Electronics</option>
                         <option value="bodyCare">Body Care</option>
@@ -87,8 +88,8 @@
                     </select>
                     
                     <div class="productPriceInput" id="productPriceInput">
-                        <input type="number" name="minPrice" id="searchMinPrice" min="0">
-                        <input type="number" name="maxPrice" id="searchMaxPrice" min="0">
+                        <input class="searchValueInput" type="number" name="price" id="productMinPrice" min="1" value="1">
+                        <input class="searchValueInput" type="number" name="price" id="productMaxPrice" min="10" value="10">
                     </div>
 
                 </div>
