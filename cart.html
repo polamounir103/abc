@@ -24,10 +24,10 @@
                     <a class="nav-link " aria-current="page" href="index.html">Home</a>
                   </li>
                   <li class="nav-item fw-bold">
-                      <a class="nav-link" href="#">Favorite</a>
+                      <a class="nav-link" href="#Favorite">Favorite</a>
                     </li>
                     <li class="nav-item cartNavItem">
-                      <a class="nav-link active cartNavIcon d-flex" >
+                      <a class="nav-link active cartNavIcon d-flex" href="#" >
                         <div class="cartIconBox">
                             <i class="fa-solid fa-cart-shopping fs-3 me-1"></i>  
                             <span class="cartBadge"></span>
@@ -67,16 +67,23 @@
           </nav>
     </header>
     <!-- ********************************************* -->
-    <main class="my-5 py-5 d-flex flex-column container">
+    <main class="my-5 py-5 d-flex flex-column container" id="Cart">
         <h2 class=" mb-4 sectionTitle">Your Cart </h2>
-        <div class="cartContainer container d-flex flex-column flex-lg-row p-5 mb-5 ">
-          `<h2 class="emptyContainer">Cart Is Empty</h2>
-           <a class="btn" href="index.html">Go Shopping</a>`
+        <div class="cartContainer container d-flex flex-column flex-lg-row p-5 mb-5">
+           <h2 class="emptyContainer">Cart Is Empty</h2>
+           <a class="btn" href="index.html">Go Shopping</a>
 
         </div> <!-- cartContainer -->
+        <div class="totalPriceContainer  justify-content-between  flex-column flex-md-row">
+          <h2 class="totalPrice">Total Price : <span>0.00</span></h2>
+          <div class="mt-2 mt-md-0">
+            <button class="btn btn-success buyingBtn">Proceed to Buy</button>
+            <button class="btn btn-danger deleteAllBtn">Delete ALL</button>
+          </div>
+        </div>
 
         <hr>
-        <div class="mt-5">
+        <div class="mt-5" id="Favorite">
           <h2 class="mb-4 sectionTitle">Favorite</h2>
           <div class="Favorite">
             <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0" class="scrollspy-example  favoriteContainer" tabindex="0">

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/signup.css">
     <title>JS Project</title>
+    <link rel="icon" type="image/x-icon" href="/images/me2.png">
 </head>
 <body>
     <header>
@@ -67,7 +68,7 @@
                   <label for="password"> Password</label>
                   <div class="inputContainer passwordContainer">
                     <input type="password" placeholder="Enter Password" id="password">
-                    <span class="passwordEye"><i class="fa-solid fa-eye"></i></span>
+                    <span class="passwordEye" onclick="showPassWord()"><i class="fa-solid fa-eye"></i></span>
                     <!-- <i class="fa-solid fa-eye-slash"></i> -->
                   </div>
                 </div>
@@ -75,14 +76,14 @@
                   <label for="confirmPassword">Confirm Password</label>
                   <div class="inputContainer passwordContainer">
                     <input type="password" placeholder="Renter Password" id="confirmPassword">
-                    <span class="confirmPasswordEye"><i class="fa-solid fa-eye"></i></span>
+                    <span class="confirmPasswordEye" onclick="showConfirmPassWord ()"><i class="fa-solid fa-eye"></i></span>
                     <!-- <i class="fa-solid fa-eye-slash"></i> -->
                   </div>
                 </div>
 
                 <div class="submitContainer">
-                  <button class="btn" id="submitBtn">SignIn <i class="fa-solid fa-right-to-bracket"></i></button>
-                  <p>Already have an account? <a href="signin.html">Sign In</a></p>
+                  <button class="btn" id="submitBtn">SignUp <i class="fa-solid fa-right-to-bracket"></i></button>
+                  <p>Already have an account? <a href="#">Sign In</a></p>
                 </div>
 
             </form>

@@ -28,14 +28,12 @@ scrollContainer.addEventListener('mousemove', (e) => {
   scrollContainer.scrollLeft = scrollLeft - walk;
 });
 
-
-
 // ---------------------------------------
 let allMainProducts = localStorage.getItem('allProducts');
 if (allMainProducts) {
   allMainProducts = JSON.parse(allMainProducts);
 }
-console.log(allMainProducts)
+// console.log(allMainProducts)
 
 
 let cartContainer = document.querySelector('.cartContainer')
@@ -47,33 +45,47 @@ if (allCartProducts){
   allCartProducts=[]
 }
 
-console.log(allCartProducts)
+// console.log(allCartProducts)
 
+let totalPrice = document.querySelector('.totalPrice span')
+let totalPriceContainer = document.querySelector('.totalPriceContainer')
+function drawTotalPrice () {
+  let price = 0 
+  if (allCartProducts.length !== 0) {
+    allCartProducts.map( (product) => {
+      price += product.cartPrice
+    })
+    totalPrice.innerHTML = price
+  } else { 
+    totalPriceContainer.style.display = "none "
+  }
+}
 
 
 function drawCartProducts () {
-    
   const cartProductsCards = allCartProducts.map( (product) => {
-      
     return `<div class="cartProductCard">
     <div class="cardImgBox">
       <img src="${product.imgPath}".jpg" alt="">
     </div>
     <div class="cartProductBody">
-      <p class="productTitle">${product.name}</p>
-      <p>Category :  Electronis</p>
-      <p class="productDescription">${product.description}</p>
+      <h3 class="productTitle">${product.name}</h3>
+      <div class="productInfo"> 
+        <p class="productCategory">Category : <span> ${product.category} </span></p>
+        <p class="productTotalPrice_${product.id}">Total Price : <span> ${product.cartPrice} </span>EGP</p>
+      </div>
       <div class="cartProductQuantity">
         <div class="cardBtns">
-          <span class="btn btn-primary" onclick="quantityIncrement(${product.id})">+</span>
+          <span class="btn btn-primary productQuantityBtn" onclick="quantityIncrement(${product.id})"><i class="fa-solid fa-plus"></i></span>
           <span class="productQuantity_${product.id}">${product.cartQuantity}</span>
-          <span class="btn btn-danger" onclick="quantityDecrement(${product.id})">-</span>
+          <span class="btn btn-danger productQuantityBtn" onclick="quantityDecrement(${product.id})"><i class="fa-solid fa-minus"></i></span>
         </div>
         <button class="deleteBtn" onclick=" deleteProductBtn (${product.id})">Delete</button>
       </div>
     </div>
 </div>`
   })
+  drawTotalPrice ()
   cartContainer.innerHTML = cartProductsCards.join('')
 }
 drawCartProducts ()
@@ -123,38 +135,45 @@ function updateCartBadge () {
 
 function quantityIncrement(id) {
   let index = allCartProducts.findIndex((item) => item.id === id) 
-  console.log(index)
+  let productTotalPrice = document.querySelector (`.productTotalPrice_${allCartProducts[index].id} span`) 
+  // console.log(index)
    allCartProducts[index].cartQuantity ++
-  console.log(allCartProducts[index])
+  // console.log(allCartProducts[index])
   let productQuantityText = document.querySelector (`.productQuantity_${allCartProducts[index].id}`) 
   productQuantityText.innerHTML = allCartProducts[index].cartQuantity
   cartBadgeValue ++
   cartBadge.innerHTML = cartBadgeValue
+  allCartProducts[index].cartPrice = allCartProducts[index].price * allCartProducts[index].cartQuantity
+  productTotalPrice.innerHTML = allCartProducts[index].cartPrice
+  drawTotalPrice ()
   localStorage.setItem('cart' , JSON.stringify(allCartProducts) )
 }
 
 function quantityDecrement(id) {
   let index = allCartProducts.findIndex((item) => item.id === id) 
+  let productTotalPrice = document.querySelector (`.productTotalPrice_${allCartProducts[index].id} span`) 
+
   if (allCartProducts[index].cartQuantity > 1 ) {
     let productQuantityText = document.querySelector (`.productQuantity_${allCartProducts[index].id}`) 
-    console.log(index)
+    // console.log(index)
     allCartProducts[index].cartQuantity --
-    console.log(allCartProducts[index])
     productQuantityText.innerHTML = allCartProducts[index].cartQuantity
+    allCartProducts[index].cartPrice = allCartProducts[index].price * allCartProducts[index].cartQuantity
+    productTotalPrice.innerHTML = allCartProducts[index].cartPrice
   }else {
     // allCartProducts[index].cartQuantity --
     allCartProducts.splice(index, 1);
     drawCartProducts();
     localStorage.setItem('cart', JSON.stringify(allCartProducts));
-
   }
- 
+
+  drawTotalPrice ()
   updateCartBadge ()
   
   localStorage.setItem('cart' , JSON.stringify(allCartProducts) )
 
 }
-// ***************  Delete All Cart   ****************
+// ***************  Delete from  Cart   ****************
 function deleteProductBtn(id) {
   let index = allCartProducts.findIndex((item) => item.id === id);
   if (index !== -1) {
@@ -162,26 +181,36 @@ function deleteProductBtn(id) {
     drawCartProducts();
     localStorage.setItem('cart', JSON.stringify(allCartProducts));
     updateCartBadge();
+
   }
 }
 
-
+let deleteAllBtn = document.querySelector('.deleteAllBtn')
+deleteAllBtn.addEventListener('click',() => {
+  allCartProducts=[]
+  localStorage.removeItem('cart')
+  drawCartProducts()
+  updateCartBadge();
+})
 
 // ---------------------------------------------------
 // **********************************************
 let favoriteContainer = document.querySelector('.favoriteContainer')
+let circlesBox = document.querySelector('.circlesBox')
 let allFavoriteProducts = localStorage.getItem('favorites')
 
 if (allFavoriteProducts){
   allFavoriteProducts = JSON.parse(allFavoriteProducts)
+}else{
+  allFavoriteProducts =[]
 }
 
-console.log(allFavoriteProducts)
+// console.log(allFavoriteProducts)
 function drawFavoriteProducts () {
   if (allFavoriteProducts.length > 0) {
 
     let favoriteLength = allFavoriteProducts.length
-    console.log( favoriteLength)
+    // console.log( favoriteLength)
     let indexID = 0
     const favoriteProductsCards = allFavoriteProducts.map( (product) => {
       indexID ++
@@ -210,49 +239,52 @@ function drawFavoriteProducts () {
 function favoriteProduct (id) {
 
     let index = allFavoriteProducts.findIndex((item) => item.id === id)
-    let favoriteProduct = allFavoriteProducts[index]
-    allFavoriteProducts.splice(favoriteProduct, 1)
+    // let favoriteProduct = allFavoriteProducts[index]
+    allFavoriteProducts.splice(index, 1)
+    // console.log(index)
+
+    let length = allFavoriteProducts.length 
+
 
     let reIndex = allMainProducts.findIndex((item) => item.id === id)
     allMainProducts[reIndex].favorite = false
-
-    
+    // console.log(allMainProducts[reIndex])
     localStorage.setItem("favorites" , JSON.stringify(allFavoriteProducts))
     localStorage.setItem("allProducts" , JSON.stringify(allMainProducts))
     drawFavoriteProducts ()
+    drawFavoriteCircles ()
 }
 
-
-
-
 // ..........................................
-let circlesBox = document.querySelector('.circlesBox')
-
 function drawFavoriteCircles () {
-  if (allFavoriteProducts.length > 0) {
+  circlesBox.innerHTML = ""
+  let favoriteLength = allFavoriteProducts.length 
+  if (favoriteLength > 0) {
 
-    let favoriteLength = allFavoriteProducts.length 
-    let index = favoriteLength/3
-    // let index = Math.
-    console.log( favoriteLength)
-    let circleNo = Math.floor(favoriteLength/3)
-    console.log( circleNo)
-    if (favoriteLength < 6 && favoriteLength < 6 && favoriteLength != 0) {
-      circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-1"></a> `
-      circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-${favoriteLength}"></a> `
-    } else {
-      circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-1"></a> `
-      let temp = 3
-      let temp2 = 3
-      console.log( temp)
-      for (let i = 1; i < circleNo  ; i ++ ) {
-        temp2 = temp + i
-        if (temp2 < favoriteLength) {
-          circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-${i+temp}"></a> `
-          temp += 3
+    // console.log( circleNo)
+    if (favoriteLength <3) {
+      favoriteContainer.style.justifyContent = "center"
+    }else {
+      let circleNo = Math.floor(favoriteLength/3)
+      favoriteContainer.style.justifyContent = "auto"
+      
+      if (favoriteLength < 6 && favoriteLength > 3 && favoriteLength != 0) {
+        circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-1"></a> `
+        circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-${favoriteLength}"></a> `
+      } else {
+        circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-1"></a> `
+        let temp = 3
+        let temp2 = 3
+        // console.log( temp)
+        for (let i = 1; i < circleNo  ; i ++ ) {
+          temp2 = temp + i
+          if (temp2 < favoriteLength) {
+            circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-${i+temp}"></a> `
+            temp += 3
+          }
         }
+        circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-${favoriteLength}"></a> `
       }
-      circlesBox.innerHTML += `<a class="list-group-item list-group-item-action" href="#list-item-${favoriteLength}"></a> `
     }
     
   }

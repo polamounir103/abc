@@ -280,7 +280,7 @@ header {
 /* ********************************************** */
 /* ** RM >> discount sign with JS (Appending) ** */
 /* ******************************************** */
-.productCard:nth-child(3n):after {
+.productCard.bestSale:after {
     content: "Best Sales";
     position: absolute;
     top: 20px;

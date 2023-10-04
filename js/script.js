@@ -93,10 +93,11 @@ if (allMainProducts){
             imgPath : "images/airbuds.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 2000,
+            cartPrice : 0,
             favorite : false,
-            bestSales : false,
+            bestSales : true,
             discount : true,
-            discountAmount : 1500,
+            discountAmount : 250,
             cartQuantity : 0 ,
         },
         {
@@ -106,6 +107,7 @@ if (allMainProducts){
             imgPath : "images/glasses.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 150,
+            cartPrice : 0,
             favorite : false,
             bestSales : false,
             discount : false,
@@ -119,10 +121,11 @@ if (allMainProducts){
             imgPath : "images/labtopStand.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 300,
+            cartPrice : 0,
             favorite : false,
-            bestSales : false,
-            discount : false,
-            discountAmount : 0,
+            bestSales : true,
+            discount : true,
+            discountAmount:50,
             cartQuantity : 0 ,
         },
         {
@@ -132,6 +135,7 @@ if (allMainProducts){
             imgPath : "images/menCap.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 75,
+            cartPrice : 0,
             favorite : false,
             bestSales : false,
             discount : false,
@@ -145,6 +149,7 @@ if (allMainProducts){
             imgPath : "images/perfume.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 250,
+            cartPrice : 0,
             favorite : false,
             bestSales : false,
             discount : false,
@@ -158,6 +163,7 @@ if (allMainProducts){
             imgPath : "images/shirt.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 300,
+            cartPrice : 0,
             favorite : false,
             bestSales : false,
             discount : false,
@@ -171,10 +177,11 @@ if (allMainProducts){
             imgPath : "images/smartWatch.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 1750,
+            cartPrice : 0,
             favorite : false,
             bestSales : false,
-            discount : false,
-            discountAmount : 0,
+            discount : true,
+            discountAmount : 250,
             cartQuantity : 0 ,
         },
         {
@@ -184,8 +191,9 @@ if (allMainProducts){
             imgPath : "images/tShirt.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 200,
+            cartPrice : 0,
             favorite : false,
-            bestSales : false,
+            bestSales : true,
             discount : false,
             discountAmount : 0,
             cartQuantity : 0 ,
@@ -197,6 +205,7 @@ if (allMainProducts){
             imgPath : "images/waterBottle.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 150,
+            cartPrice : 0,
             favorite : false,
             bestSales : false,
             discount : false,
@@ -210,10 +219,11 @@ if (allMainProducts){
             imgPath : "images/water.png",
             description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad culpa provident deleniti, voluptatem consequuntur!",
             price : 75,
+            cartPrice : 0,
             favorite : false,
-            bestSales : false,
+            bestSales : true,
             discount : true,
-            discountAmount : 60,
+            discountAmount : 6,
             cartQuantity : 0 ,
         },
     ]
@@ -225,6 +235,8 @@ function drawMainProducts () {
         let productPriceBoxClass = "productPriceBox";
         let productNewPriceBox = "productNewPriceBox notActive";
         let productFavoriteClass = "far fa-heart"
+        let bestSaleClass = "productCard"
+
         if (product.discount === true) {
             productPriceBoxClass += " productOriginalPriceBox";
             productNewPriceBox -= "notActive"
@@ -232,7 +244,10 @@ function drawMainProducts () {
         if (product.favorite === true) {
             productFavoriteClass = "fas fa-heart active";
         }
-        return `<div class="productCard">
+        if (product.bestSales === true) {
+            bestSaleClass += " bestSale"
+        }
+        return `<div class="${bestSaleClass}">
         <div class="productCardHeader">
             <img src="${product.imgPath}" alt="" class="productImg">
         </div> <!-- productCardHeader -->
@@ -246,7 +261,7 @@ function drawMainProducts () {
                                 <sub> EGP</sub>
                             </div>
                             <div class="${productNewPriceBox}">
-                                <span class="productNewPrice">${product.discountAmount}</span>
+                                <span class="productNewPrice">${product.price-product.discountAmount}</span>
                                 <sub> EGP</sub>
                             </div>
                         </div>
@@ -262,6 +277,7 @@ function drawMainProducts () {
                     </div> <!-- productCardFooter -->
             </div> <!-- productCard -->`
     })
+
     mainPageContainer.innerHTML = mainProductsCards.join('')
 }
 drawMainProducts()
@@ -278,7 +294,7 @@ if (allCartProducts){
   console.log(allCartProducts)
   cartProducts = allCartProducts
 }
-console.log(cartProducts)
+// console.log(cartProducts)
 // ********  Cart Badge  ********
 let cartBadgeValue = 0
 let cartBadge = document.querySelector(".cartBadge")
@@ -305,14 +321,21 @@ function addToCart (id) {
 
         let index = allMainProducts.findIndex((item) => item.id === id)
         let product = allMainProducts[index]
+
         let cartProductCheck = cartProducts.findIndex((item) => item.id === id)
         if (cartProductCheck === -1) {
             cartProducts.push(product)
-            product.cartQuantity = 1
+            product.cartQuantity = 1   
             let cardProductQuantityBox = document.querySelector(`#cardProductQuantityBox_${product.id}`);
             let cardProductQuantityValue = document.querySelector(`.cardProductQuantityValue_${product.id}`)
             let addToCartBtn = document.querySelector(`.addToCartBtn_${product.id}`);
-            
+            if (product.discount = true){
+                product.price -= product.discountAmount  
+                console.log(product)
+            }else {
+
+            }
+
             addToCartBtn.style.display = 'none';
             cardProductQuantityValue.innerHTML =  1
             cardProductQuantityBox.style.display = "flex";
@@ -371,6 +394,8 @@ cartOnload ()
 function drawCartItems() {
     cartProductsContainer.innerHTML = ""
     let cartItems = cartProducts.map((product) => {
+        product.cartPrice = product.cartQuantity * product.price
+        // console.log(product)
         return `<div class="cartProduct">
         <img src="${product.imgPath}" alt="">
         <div class="cartProductInfo">
@@ -396,7 +421,7 @@ function quantityIncrement(id) {
     let originIndex = allMainProducts.findIndex((item) => item.id === id)
     allMainProducts[originIndex].quantity ++
     
-    console.log("originIndex: " + originIndex)
+    // console.log("originIndex: " + originIndex)
     let index = cartProducts.findIndex((item) => item.id === id);
     let cardProductQuantityValue = document.querySelector(`.cardProductQuantityValue_${id}`)
     if (index !== -1) {
@@ -423,14 +448,13 @@ function quantityDecrement(id) {
             cardProductQuantityValue.innerHTML = cartProducts[index].cartQuantity
             drawCartItems() 
         }else {
-
             cartProducts.splice(index, 1) ;
             addToCartBtn.style.display = 'flex';
             cardProductQuantityBox.style.display = "none";
         }
         drawCartItems() 
     }
-    console.log(cartProducts)
+    // console.log(cartProducts)
 }
 // ***************  Delete All Cart   ****************
 let deleteAllCart = document.getElementById('deleteAllCart')
@@ -487,13 +511,135 @@ function favoriteProduct (id) {
 
 
 
+/////////////////////////////////////////////////
+// *******************  Search  *****************
+
+
+// searchNameInput.addEventListener("input", function() {
+//     const allSearchProductsCards= allMainProducts.map((product) => {
+//         let productName = product.name
+//         let name = productName.toLowerCase()
+//         let nameInput = searchNameInput.value
+//         let key = nameInput.toLowerCase()
+//         if(name.indexOf(key) !== -1) {
+//             // console.log(key + product.name)
+//             let productPriceBoxClass = "productPriceBox";
+//             let productNewPriceBox = "productNewPriceBox notActive";
+//             let productFavoriteClass = "far fa-heart"
+//             let bestSaleClass = "productCard"
+    
+//             if (product.discount === true) {
+//                 productPriceBoxClass += " productOriginalPriceBox";
+//                 productNewPriceBox -= "notActive"
+//             }
+//             if (product.favorite === true) {
+//                 productFavoriteClass = "fas fa-heart active";
+//             }
+//             if (product.bestSales === true) {
+//                 bestSaleClass += " bestSale"
+//             }
+//             return `<div class="${bestSaleClass}">
+//             <div class="productCardHeader">
+//                 <img src="${product.imgPath}" alt="" class="productImg">
+//             </div> <!-- productCardHeader -->
+//             <div class="productCardFooter d-flex flex-column">
+//                 <h2>${product.name}</h2>
+//                 <p class="productDescription">${product.description}</p>
+//                 <div class="productPriceInfo">
+//                             <div class="d-flex">
+//                                 <div class="${productPriceBoxClass}">
+//                                     <span class="productOriginalPrice">${product.price}</span>
+//                                     <sub> EGP</sub>
+//                                 </div>
+//                                 <div class="${productNewPriceBox}">
+//                                     <span class="productNewPrice">${product.price-product.discountAmount}</span>
+//                                     <sub> EGP</sub>
+//                                 </div>
+//                             </div>
+//                             <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
+//                         </div>
+//                         <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>
+    
+//                         <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+//                             <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+//                             <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+//                             <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+//                         </div>
+//                         </div> <!-- productCardFooter -->
+//                 </div> <!-- productCard -->`
+//         }
+    
+//         mainPageContainer.innerHTML = allSearchProductsCards.join('')
+//         }
+//     )
+// })
 
 
 
 
+// Declare allSearchProductsCards variable outside the event listener function
+const allSearchProductsCards = [];
 
+searchNameInput.addEventListener("input", function() {
+    // Clear the array before adding new products
+    allSearchProductsCards.length = 0;
 
+    allMainProducts.forEach((product) => {
+        let productName = product.name;
+        let name = productName.toLowerCase();
+        let nameInput = searchNameInput.value;
+        let key = nameInput.toLowerCase();
 
-
+        if (name.indexOf(key) !== -1) {
+            // Rest of your code to generate product cards
+            let productPriceBoxClass = "productPriceBox";
+            let productNewPriceBox = "productNewPriceBox notActive";
+            let productFavoriteClass = "far fa-heart"
+            let bestSaleClass = "productCard"
+    
+            if (product.discount === true) {
+                productPriceBoxClass += " productOriginalPriceBox";
+                productNewPriceBox -= "notActive"
+            }
+            if (product.favorite === true) {
+                productFavoriteClass = "fas fa-heart active";
+            }
+            if (product.bestSales === true) {
+                bestSaleClass += " bestSale"
+            }
+            // Push the generated product card HTML to the array
+            allSearchProductsCards.push(`<div class="${bestSaleClass}">
+             <div class="productCardHeader">
+                 <img src="${product.imgPath}" alt="" class="productImg">
+             </div> <!-- productCardHeader -->
+             <div class="productCardFooter d-flex flex-column">
+                 <h2>${product.name}</h2>
+                 <p class="productDescription">${product.description}</p>
+                 <div class="productPriceInfo">
+                             <div class="d-flex">
+                                 <div class="${productPriceBoxClass}">
+                                     <span class="productOriginalPrice">${product.price}</span>
+                                     <sub> EGP</sub>
+                                 </div>
+                                 <div class="${productNewPriceBox}">
+                                     <span class="productNewPrice">${product.price-product.discountAmount}</span>
+                                     <sub> EGP</sub>
+                                 </div>
+                             </div>
+                             <span class="favoriteBtn"><i class="${productFavoriteClass}" id="favoriteBtn_${product.id}" onclick="favoriteProduct (${product.id})"></i></span>
+                         </div>
+                         <button class=" btn btn-primary mt-2 addToCartBtn addToCartBtn_${product.id}" onclick=" addToCart (${product.id})">Add Cart</button>  
+                         <div class="cardProductQuantity" id="cardProductQuantityBox_${product.id}">
+                             <span class="btn btn-success" id="cartProductIncrement" onclick="quantityIncrement (${product.id})">+</span>
+                             <span id="cartProductQuantity" class="cardProductQuantityValue_${product.id}">${product.cartQuantity}</span>
+                             <span class="btn btn-danger" id="cartProductDecrement" onclick="quantityDecrement(${product.id})">-</span>
+                         </div>
+                         </div> <!-- productCardFooter -->
+                 </div> <!-- productCard -->`)
+        }
+    });
+    
+    mainPageContainer.innerHTML = allSearchProductsCards.join('');
+});
 
 
